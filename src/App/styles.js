@@ -5,9 +5,10 @@ export const styles = StyleSheet.create({
     marginTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
     flex: 1,
   },
-  scrollView: {
+  container: {
     paddingHorizontal: 20,
-    paddingVertical: 10,
     flex: 1,
+    justifyContent: "center",
+    gap: 16,
   },
 });
