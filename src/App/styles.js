@@ -10,16 +10,4 @@ export const styles = StyleSheet.create({
     paddingVertical: 10,
     flex: 1,
   },
-  buttonsContainer: { gap: 16 },
-  button: {
-    backgroundColor: "#222",
-    height: 48,
-    borderRadius: 8,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  buttonLabel: { color: "#fff", fontWeight: "bold" },
-  buttonDisabled: {
-    backgroundColor: "#ccc",
-  },
 });
