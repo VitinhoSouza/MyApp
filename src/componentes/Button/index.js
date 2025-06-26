@@ -2,6 +2,10 @@ import { Pressable, Text, View } from "react-native";
 
 import { styles } from "./styles";
 
+/**
+ * @param {import('react-native').PressableProps} props
+ */
+
 export function Button({ children, disabled, ...props }) {
   return (
     <View style={styles.buttonWrapper}>
