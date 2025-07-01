@@ -4,6 +4,7 @@ import { styles } from "./styles";
 import { Button } from "../componentes/Button";
 import { Input } from "../componentes/Input";
 import { useRef, useState } from "react";
+import { Textarea } from "../componentes/Textarea";
 
 function App() {
   const passwordInputRef = useRef();
@@ -19,6 +20,8 @@ function App() {
     <SafeAreaView style={styles.wrapper}>
       <View style={styles.container}>
         <StatusBar barStyle="dark-content" />
+
+        <Textarea placeholder="Descrição" />
 
         <Input
           placeholder="E-mail"
