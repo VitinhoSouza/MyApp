@@ -1,4 +1,4 @@
-import { StatusBar, SafeAreaView, View } from "react-native";
+import { StatusBar, SafeAreaView, View, Switch } from "react-native";
 
 import { styles } from "./styles";
 import { Button } from "../componentes/Button";
@@ -11,6 +11,7 @@ function App() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [selected, setSelected] = useState(false);
 
   function handleSubmit() {
     console.log({ email, password });
@@ -20,6 +21,20 @@ function App() {
     <SafeAreaView style={styles.wrapper}>
       <View style={styles.container}>
         <StatusBar barStyle="dark-content" />
+
+        <Switch
+          style={{
+            marginRight: "auto",
+          }}
+          value={selected}
+          onValueChange={setSelected}
+          thumbColor="purple"
+          ios_backgroundColor="yellow"
+          trackColor={{
+            false: "yellow", // * Android only
+            true: "#f00",
+          }}
+        />
 
         <Textarea placeholder="Descrição" />
 
