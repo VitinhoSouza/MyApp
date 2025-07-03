@@ -8,7 +8,15 @@ export const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 20,
     flex: 1,
-    justifyContent: "center",
-    gap: 16,
+  },
+  postContainer: {
+    backgroundColor: "#333",
+    padding: 24,
+    borderRadius: 8,
+  },
+  postTitle: {
+    color: "#fff",
+    fontSize: 18,
+    fontWeight: "bold",
   },
 });
