@@ -1,4 +1,12 @@
-import { StatusBar, SafeAreaView, View, Text, FlatList } from "react-native";
+import {
+  StatusBar,
+  SafeAreaView,
+  View,
+  Text,
+  FlatList,
+  RefreshControl,
+  ActivityIndicator,
+} from "react-native";
 
 import { styles } from "./styles";
 
@@ -10,9 +18,29 @@ function App() {
 
   return (
     <SafeAreaView style={styles.wrapper}>
+      <ActivityIndicator
+        animating={true}
+        hidesWhenStopped={false} // ios only
+        color={"red"}
+        size={"large"} // If Number only android
+      />
       <View style={styles.container}>
         <StatusBar barStyle="dark-content" />
         <FlatList
+          refreshControl={
+            <RefreshControl
+              onRefresh={() => console.log("Atualizando...")}
+              refreshing={false}
+              //iOS only
+              tintColor="red"
+              title="Carregando..."
+              titleColor="red"
+              //Android only
+              colors={["red"]}
+              progressBackgroundColor={"gray"}
+              size={"large"}
+            />
+          }
           data={posts}
           keyExtractor={(post) => post.id}
           renderItem={({ item: post }) => (
@@ -28,6 +56,7 @@ function App() {
             offset: index * (64 + 16),
           })} // ++ FlatList perf
           ListHeaderComponent={<Text>Header</Text>}
+          stickyHeaderIndices={[0, 5]}
           ListFooterComponent={<Text>Footer</Text>}
           ListEmptyComponent={<Text>Empty</Text>}
         />
