@@ -3,30 +3,34 @@ import {
   SafeAreaView,
   View,
   Text,
-  FlatList,
   RefreshControl,
   ActivityIndicator,
+  SectionList,
 } from "react-native";
 
 import { styles } from "./styles";
 
 function App() {
-  const posts = Array.from({ length: 100 }, (value, index) => ({
+  const posts = Array.from({ length: 50 }, (value, index) => ({
     id: Math.random(),
     title: `Post ${index + 1}`,
   }));
 
+  function Separator() {
+    return <Text>Separator</Text>;
+  }
+
   return (
     <SafeAreaView style={styles.wrapper}>
       <ActivityIndicator
-        animating={true}
+        animating={false}
         hidesWhenStopped={false} // ios only
         color={"red"}
         size={"large"} // If Number only android
       />
       <View style={styles.container}>
         <StatusBar barStyle="dark-content" />
-        <FlatList
+        <SectionList
           refreshControl={
             <RefreshControl
               onRefresh={() => console.log("Atualizando...")}
@@ -41,24 +45,44 @@ function App() {
               size={"large"}
             />
           }
-          data={posts}
           keyExtractor={(post) => post.id}
           renderItem={({ item: post }) => (
             <View key={post.id} style={styles.postContainer}>
               <Text style={styles.postTitle}>{post.title}</Text>
             </View>
           )}
-          // contentContainerStyle={{ gap: 16 }}
-          ItemSeparatorComponent={<Text>Separator</Text>}
+          contentContainerStyle={{ gap: 16 }}
+          ItemSeparatorComponent={Separator}
           getItemLayout={(data, index) => ({
             index,
             length: 64 + 16,
             offset: index * (64 + 16),
-          })} // ++ FlatList perf
+          })} // ++ perf
           ListHeaderComponent={<Text>Header</Text>}
-          stickyHeaderIndices={[0, 5]}
+          // stickyHeaderIndices={[0, 5]} // Não funciona
           ListFooterComponent={<Text>Footer</Text>}
           ListEmptyComponent={<Text>Empty</Text>}
+          sections={[
+            {
+              title: "Primeira seção",
+              data: posts.slice(0, 5),
+              renderItem: ({ item: post }) => (
+                <View key={post.id} style={styles.postContainer}>
+                  <Text style={styles.postTitle}>{post.title} - Section 1</Text>
+                </View>
+              ),
+            },
+            {
+              data: posts.slice(5, 50),
+            },
+          ]}
+          renderSectionHeader={({ section: { title } }) => (
+            <View>
+              <Text>Section Header - {title}</Text>
+            </View>
+          )}
+          stickySectionHeadersEnabled={false} //iOS only
+          stickyHeaderHiddenOnScroll //iOS only
         />
       </View>
     </SafeAreaView>
