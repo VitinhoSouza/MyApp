@@ -15,7 +15,13 @@ function App() {
           <Button onPress={() => setVisible(true)}>Abrir modal</Button>
         </View>
       </SafeAreaView>
-      <Modal visible={visible} animationType="fade" transparent>
+      <Modal
+        visible={visible}
+        animationType="slide"
+        // transparent
+        presentationStyle="pageSheet" //iOS only
+        onRequestClose={() => setVisible(false)}
+      >
         <View style={styles.modalOverlay}>
           <View style={styles.modalContainer}>
             <Text
