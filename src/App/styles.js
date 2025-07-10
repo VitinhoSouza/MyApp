@@ -9,16 +9,15 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 20,
     flex: 1,
   },
-  postContainer: {
-    backgroundColor: "#333",
-    borderRadius: 8,
-    height: 64,
-    justifyContent: "center",
+  modalOverlay: {
+    backgroundColor: "rgba(0, 0, 0, 0.4)",
+    flex: 1,
     alignItems: "center",
+    justifyContent: "center",
   },
-  postTitle: {
-    color: "#fff",
-    fontSize: 18,
-    fontWeight: "bold",
+  modalContainer: {
+    backgroundColor: "#fff",
+    padding: 24,
+    borderRadius: 8,
   },
 });
