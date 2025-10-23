@@ -5,6 +5,7 @@ import {
   Modal,
   Text,
   Alert,
+  ActionSheetIOS,
 } from "react-native";
 
 import { Button } from "../componentes/Button";
@@ -69,6 +70,42 @@ function App() {
     );
   }
 
+  function handleShowActionSheet() {
+    ActionSheetIOS.showActionSheetWithOptions(
+      {
+        options: ["Cancel", "Normal", "Destructive", "Disabled"],
+        destructiveButtonIndex: 2,
+        cancelButtonIndex: 0,
+        title: "Título do Action Sheet",
+        message: "Mensagem do Action Sheet",
+        disabledButtonIndices: [3],
+        userInterfaceStyle: "dark",
+        tintColor: "purple",
+        cancelButtonTintColor: "#0f0", //BUG possible
+      },
+      (buttonIndex) => {
+        console.log("Button index pressed:", buttonIndex);
+      }
+    );
+  }
+
+  function handleShowShareActionSheet() {
+    ActionSheetIOS.showShareActionSheetWithOptions(
+      {
+        message: "Mensagem para compartilhar",
+        url: "https://jstack.com.br",
+        subject: "Assunto do compartilhamento",
+        excludedActivityTypes: ["com.apple.UIKit.activity.PostToTwitter"],
+      },
+      (error) => console.log("Error sharing:", error),
+      (success, method) => {
+        if (success) {
+          console.log("Shared via", method);
+        }
+      }
+    );
+  }
+
   return (
     <>
       <SafeAreaView style={styles.wrapper}>
@@ -76,7 +113,11 @@ function App() {
         <View style={styles.container}>
           <Button onPress={() => setVisible(true)}>Abrir modal</Button>
           <Button onPress={handleShowAlert}>Mostrar alerta</Button>
-          {} <Button onPress={handleShowPrompt}>Mostrar prompt</Button>
+          <Button onPress={handleShowPrompt}>Mostrar prompt</Button>
+          <Button onPress={handleShowActionSheet}>Mostrar ActionSheet</Button>
+          <Button onPress={handleShowShareActionSheet}>
+            Mostrar share ActionSheet
+          </Button>
         </View>
       </SafeAreaView>
       <Modal
