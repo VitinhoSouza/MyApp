@@ -1,21 +1,21 @@
 import {
-  StatusBar,
-  SafeAreaView,
-  View,
-  Modal,
-  Text,
-  Alert,
   ActionSheetIOS,
+  Alert,
+  Image,
+  Modal,
+  SafeAreaView,
+  StatusBar,
+  Text,
+  View,
 } from "react-native";
 
 import { Button } from "../componentes/Button";
 
-import { styles } from "./styles";
 import { useState } from "react";
+import { styles } from "./styles";
 
 function App() {
   const [visible, setVisible] = useState(false);
-
   function handleShowAlert() {
     Alert.alert(
       "Atenção!",
@@ -111,7 +111,18 @@ function App() {
       <SafeAreaView style={styles.wrapper}>
         <StatusBar barStyle="dark-content" animated />
         <View style={styles.container}>
-          <Button onPress={() => setVisible(true)}>Abrir modal</Button>
+          <Image
+            source={{
+              uri: "https://images.unsplash.com/photo-1560272564-c83b66b1ad12?q=80&w=749&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+              method: "POST",
+              body: JSON.stringify({ name: "Victor" }),
+              headers: {
+                "Content-Type": "application/json",
+              },
+            }}
+            style={{ width: 370, height: 200 }}
+          />
+          ;<Button onPress={() => setVisible(true)}>Abrir modal</Button>
           <Button onPress={handleShowAlert}>Mostrar alerta</Button>
           <Button onPress={handleShowPrompt}>Mostrar prompt</Button>
           <Button onPress={handleShowActionSheet}>Mostrar ActionSheet</Button>
