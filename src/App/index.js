@@ -1,7 +1,8 @@
 import {
   Alert,
-  ImageBackground,
+  Image,
   Modal,
+  PixelRatio,
   SafeAreaView,
   StatusBar,
   Text,
@@ -9,8 +10,6 @@ import {
 } from "react-native";
 
 import { Button } from "../componentes/Button";
-
-import imageDefault from "../images/default.jpg";
 
 import { useState } from "react";
 import { styles } from "./styles";
@@ -47,18 +46,36 @@ function App() {
   }
 
   return (
-    <ImageBackground
-      source={{
-        uri: "https://images.unsplash.com/photo-1560272564-c83b66b1ad12?q=80&w=749&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      }}
-      defaultSource={imageDefault}
-      style={{ flex: 1 }}
-    >
+    <>
       <SafeAreaView style={styles.wrapper}>
         <StatusBar barStyle="dark-content" animated />
         <View style={styles.container}>
           <Button onPress={() => setVisible(true)}>Abrir modal</Button>
           <Button onPress={handleShowAlert}>Mostrar alerta</Button>
+          <Text>Pixel Ratio: {PixelRatio.get()}</Text>
+          <Image
+            source={[
+              {
+                uri: "https://placehold.co/100x100.png",
+                width: 100,
+                height: 100,
+              },
+              {
+                uri: "https://placehold.co/200x200.png",
+                width: 200,
+                height: 200,
+              },
+              {
+                uri: "https://placehold.co/300x300.png",
+                width: 300,
+                height: 300,
+              },
+            ]}
+            style={{
+              width: 80,
+              height: 80,
+            }}
+          />
         </View>
       </SafeAreaView>
       <Modal
@@ -88,7 +105,7 @@ function App() {
           </View>
         </View>
       </Modal>
-    </ImageBackground>
+    </>
   );
 }
 
