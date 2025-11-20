@@ -1,8 +1,6 @@
 import {
   Alert,
-  Image,
   Modal,
-  PixelRatio,
   SafeAreaView,
   StatusBar,
   Text,
@@ -12,6 +10,7 @@ import {
 import { Button } from "../componentes/Button";
 
 import { useState } from "react";
+import { UserIcon, UserIcon2 } from "../componentes/UserIcon";
 import { styles } from "./styles";
 
 function App() {
@@ -52,30 +51,8 @@ function App() {
         <View style={styles.container}>
           <Button onPress={() => setVisible(true)}>Abrir modal</Button>
           <Button onPress={handleShowAlert}>Mostrar alerta</Button>
-          <Text>Pixel Ratio: {PixelRatio.get()}</Text>
-          <Image
-            source={[
-              {
-                uri: "https://placehold.co/100x100.png",
-                width: 100,
-                height: 100,
-              },
-              {
-                uri: "https://placehold.co/200x200.png",
-                width: 200,
-                height: 200,
-              },
-              {
-                uri: "https://placehold.co/300x300.png",
-                width: 300,
-                height: 300,
-              },
-            ]}
-            style={{
-              width: 80,
-              height: 80,
-            }}
-          />
+          <UserIcon />
+          <UserIcon2 />
         </View>
       </SafeAreaView>
       <Modal
