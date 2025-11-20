@@ -1,6 +1,5 @@
 import {
-  Alert,
-  Modal,
+  DrawerLayoutAndroid,
   SafeAreaView,
   StatusBar,
   Text,
@@ -9,80 +8,41 @@ import {
 
 import { Button } from "../componentes/Button";
 
-import { useState } from "react";
-import { UserIcon, UserIcon2 } from "../componentes/UserIcon";
+import { useRef } from "react";
 import { styles } from "./styles";
 
 function App() {
-  const [visible, setVisible] = useState(false);
-  function handleShowAlert() {
-    Alert.alert(
-      "Atenção!",
-      "Bloquear o usuário fará com que ele perca acesso ao sistema",
-      [
-        {
-          text: "Cancelar",
-          isPreferred: true, //iOS only
-          onPress: () => console.log("Bloquear usuário"),
-          style: "cancel",
-        },
-        {
-          text: "Bloquear",
-          onPress: () => console.log("Bloquear usuário"),
-          style: "destructive", //iOS only
-        },
-        {
-          text: "Depois",
-          onPress: () => console.log("Bloquear usuário"),
-        },
-      ],
-      {
-        cancelable: true, // Android only
-        onDismiss: () => console.log("Alert dimissed"), // Android only
-        userInterfaceStyle: "light", // iOS only
-      }
-    );
+  const drawerRef = useRef(null);
+
+  function handleOpenMenu() {
+    drawerRef.current?.openDrawer();
+  }
+
+  function handleCloseMenu() {
+    drawerRef.current?.closeDrawer();
   }
 
   return (
-    <>
-      <SafeAreaView style={styles.wrapper}>
+    <SafeAreaView style={styles.wrapper}>
+      <DrawerLayoutAndroid
+        ref={drawerRef}
+        drawerPosition="right"
+        drawerBackgroundColor="rgba(255, 0, 0, 0.5)"
+        drawerWidth={200}
+        drawerLockMode="locked-open"
+        renderNavigationView={() => (
+          <View>
+            <Text>Oi meu chapa!</Text>
+            <Button onPress={handleCloseMenu}>Fechar menu</Button>
+          </View>
+        )}
+      >
         <StatusBar barStyle="dark-content" animated />
         <View style={styles.container}>
-          <Button onPress={() => setVisible(true)}>Abrir modal</Button>
-          <Button onPress={handleShowAlert}>Mostrar alerta</Button>
-          <UserIcon />
-          <UserIcon2 />
+          <Button onPress={handleOpenMenu}>Abrir menu</Button>
         </View>
-      </SafeAreaView>
-      <Modal
-        visible={visible}
-        animationType="slide"
-        // transparent
-        presentationStyle="pageSheet" //iOS only
-        onRequestClose={() => setVisible(false)}
-      >
-        <View style={styles.modalOverlay}>
-          <View style={styles.modalContainer}>
-            <Text
-              style={{
-                marginBottom: 16,
-              }}
-            >
-              Conteúdo do meu modal
-            </Text>
-            <Button
-              style={{
-                paddingHorizontal: 20,
-              }}
-              onPress={() => setVisible(false)}
-            >
-              Fechar
-            </Button>
-          </View>
-        </View>
-      </Modal>
-    </>
+      </DrawerLayoutAndroid>
+    </SafeAreaView>
   );
 }
 
