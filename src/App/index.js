@@ -1,5 +1,6 @@
-import { SafeAreaView, StatusBar, Text, View } from "react-native";
+import { SafeAreaView, StatusBar, View } from "react-native";
 
+import { AppText } from "../componentes/AppText";
 import { styles } from "./styles";
 
 function App() {
@@ -7,14 +8,13 @@ function App() {
     <SafeAreaView style={styles.wrapper}>
       <StatusBar barStyle="dark-content" animated />
       <View style={styles.container}>
-        <Text
+        <AppText
           style={{
             fontSize: 24,
-            fontFamily: "Danfo-Regular",
           }}
         >
           Hello, Jstack!
-        </Text>
+        </AppText>
       </View>
     </SafeAreaView>
   );
